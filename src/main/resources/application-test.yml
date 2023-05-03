@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test # 메모리 DB 사용->휘발성->테스트 종료 후 데이터 사라짐
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver

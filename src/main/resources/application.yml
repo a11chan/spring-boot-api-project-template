@@ -1,0 +1,39 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  # todo 개발 데이터베이스 연결
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddlAuto: create
+    show-sql: true # 콘솔창에 SQL 출력
+    properties:
+      hibernate:
+        format_sql: true # SQL 보기 좋게 출력
+        default_batch_fetch_size : 500 # 일대다 컬렉션 조회 시 성능 최적화
+    open-in-view: false # 영속성 컨텍스트의 생존 범위를 Tx 범위로 한정
+
+  servlet:
+    multipart:
+      max-file-size: 10MB # 파일 업로드 요청 시 파일 1개의 크기 최대치
+      max-request-size: 100MB # 파일 업로드 요청 시 모든 첨부파일 크기 최대치
+
+logging:
+  level:
+    org.hibernate.type: trace # 쿼리 조건에 바인딩되는 값 및 조회 결과 콘솔에 출력
+    com.app: debug # todo 패키지 수정
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
